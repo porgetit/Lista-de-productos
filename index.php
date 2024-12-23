@@ -27,8 +27,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['productName'], $_POST
 <body class="bg-light">
     <div class="container my-4">
         <h1 class="text-center mb-4">Listado de Productos</h1>
-        <div class="mb-3">
-            <input type="text" id="searchBar" class="form-control" placeholder="Buscar por producto, subcategoría o categoría" oninput="filterProducts()">
+        <div class="mb-3 d-flex justify-content-between align-items-center">
+            <input type="text" id="searchBar" class="form-control me-3" placeholder="Buscar por producto, subcategoría o categoría" oninput="filterProducts()">
+            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                    Agregar
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <li><a class="dropdown-item" href="./modules/add_product.php">Nuevo Producto</a></li>
+                    <li><a class="dropdown-item" href="./modules/add_subcategory.php">Nueva Subcategoría</a></li>
+                    <li><a class="dropdown-item" href="./modules/add_category.php">Nueva Categoría</a></li>
+                </ul>
+            </div>
         </div>
         <div id="productList" class="accordion">
             <!-- Product items will be dynamically populated here -->

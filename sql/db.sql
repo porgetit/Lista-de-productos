@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS subcategories (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) UNIQUE,
     category_id INT NOT NULL,
-    FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE
+    FOREIGN KEY (category_id) REFERENCES categories(id)
 );
 
 -- Create table for products
@@ -27,12 +27,12 @@ CREATE TABLE IF NOT EXISTS products (
 
 create view if not exists products_view as
 select 
-	products.name as name, 
+    products.name as name, 
     categories.name as category, 
     subcategories.name as subcategory,
     products.price as price
 from 
-	products inner join subcategories on products.subcategory_id = subcategories.id 
+    products inner join subcategories on products.subcategory_id = subcategories.id 
     inner join categories on subcategories.category_id = categories.id 
 order by products.name;
 
@@ -58,12 +58,12 @@ insert into categories (name) values
     ("Alambres galvanizados"),
     ("Soldadura eléctrica"),
     ("Ángulos esquineros para pared"),
-    ("Herremientas"),
+    ("Herramientas"),
     ("Cable de acero"),
     ("Cocina"),
     ("Fibras y cordinos"),
     ("Polvos"),
-    ("Impermabilizantes"),
+    ("Impermeabilizantes");
 
 insert into subcategories (name, category_id) values
     ("Tubo pesado", (select id from categories where name = "Tubería sanitaria")),
@@ -99,7 +99,7 @@ insert into subcategories (name, category_id) values
     ("Tubo SH40", (select id from categories where name = "Tubería eléctrica")),
     ("Tubo EMT", (select id from categories where name = "Tubería eléctrica")),
     ("Caja RETIE metálica", (select id from categories where name = "Accesorios para tubería eléctrica")),
-    ("Caja plástica", (select id from categories where name = "Accesorios para tubería eléctrica")).
+    ("Caja plástica", (select id from categories where name = "Accesorios para tubería eléctrica")),
     ("Curva conduit fina", (select id from categories where name = "Accesorios para tubería eléctrica")),
     ("Curva conduit económica", (select id from categories where name = "Accesorios para tubería eléctrica")),
     ("Terminal conduit fino", (select id from categories where name = "Accesorios para tubería eléctrica")),
@@ -149,13 +149,13 @@ insert into subcategories (name, category_id) values
     ("Bandejas para pintura", (select id from categories where name = "Herramientas")),
     ("Rodillos", (select id from categories where name = "Herramientas")),
     ("Cordino", (select id from categories where name = "Fibras y cordinos")),
-    ("Fibra plástica", (select id from categorios where name = "Fibras y cordinos")),
+    ("Fibra plástica", (select id from categories where name = "Fibras y cordinos")),
     ("Cemento", (select id from categories where name = "Polvos")),
     ("Estuco", (select id from categories where name = "Polvos")),
     ("Boquilla", (select id from categories where name = "Polvos")),
-    ("Pegaenchape y aditivos", (select id from categories where name = "Polvos"))
-    ("Impermeabilizante en polvo", (select id from categories where name = "Impermeabilizante")),
-    ("Yeso", (select id from categories where name = "Polvos")),
+    ("Pegaenchape y aditivos", (select id from categories where name = "Polvos")),
+    ("Impermeabilizante en polvo", (select id from categories where name = "Impermeabilizantes")),
+    ("Yeso", (select id from categories where name = "Polvos"));
 
 
 insert into products (name, subcategory_id, price) values
@@ -224,7 +224,7 @@ insert into products (name, subcategory_id, price) values
     ("Tapón limpieza 3", (select id from subcategories where name = "Tapón limpieza"), 10800),
     ("Tapón limpieza 4", (select id from subcategories where name = "Tapón limpieza"), 13800),
     ("Tapón limpieza 6", (select id from subcategories where name = "Tapón limpieza"), 0),
-    ("Junta de expansión 1 1/2",(select id from subcategories where name = "Junta de expansión"), 0),
+    ("Junta de expansión 1 1/2", (select id from subcategories where name = "Junta de expansión"), 0),
     ("Junta de expansión 2", (select id from subcategories where name = "Junta de expansión"), 12000),
     ("Junta de expansión 3", (select id from subcategories where name = "Junta de expansión"), 16000),
     ("Junta de expansión 4", (select id from subcategories where name = "Junta de expansión"), 21800),
@@ -416,9 +416,9 @@ insert into products (name, subcategory_id, price) values
     ("Alambre en barra #14 x 1 metro", (select id from subcategories where name = "Alambre en barra"), 1900),
     ("Alambre en barra #12 x 1 metro", (select id from subcategories where name = "Alambre en barra"), 2500),
     ("Alambre en barra #10 x 1 metro", (select id from subcategories where name = "Alambre en barra"), 4600),
-    ("Alambre en barra #8 x 1 metro", (select id from subcategories where name = "Alambre en barra", 6250)),
+    ("Alambre en barra #8 x 1 metro", (select id from subcategories where name = "Alambre en barra"), 6250),
     ("Cable 7 hilos #14 x 1 metro", (select id from subcategories where name = "Cable 7 hilos"), 2250),
-    ("Cable 7 hilos #12 x 1 metro", (select id from subcategories where name = "Cable 7 hilos", 3050)),
+    ("Cable 7 hilos #12 x 1 metro", (select id from subcategories where name = "Cable 7 hilos"), 3050),
     ("Cable 7 hilos #10 x 1 metro", (select id from subcategories where name = "Cable 7 hilos"), 4950),
     ("Cable 7 hilos #8 x 1 metro", (select id from subcategories where name = "Cable 7 hilos"), 6950),
     ("Alambre negro x kilo", (select id from subcategories where name = "Alambre negro"), 8500),
@@ -504,4 +504,4 @@ insert into products (name, subcategory_id, price) values
     ("Estuco Impadoc Obras x kilo", (select id from subcategories where name = "Estuco"), 2500),
     ("Estuco Impadoc Listo x bulto", (select id from subcategories where name = "Estuco"), 44000),
     ("Estuco Impadoc Listo x 1/2 bulto", (select id from subcategories where name = "Estuco"), 25000),
-    ("Estuco Impadoc Listo x kilo", (select id from subcategories where name = "Estuco"), 2500),
+    ("Estuco Impadoc Listo x kilo", (select id from subcategories where name = "Estuco"), 2500);
