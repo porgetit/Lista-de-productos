@@ -33,6 +33,11 @@ while ($row = $query->fetch_assoc()) {
     }
 }
 
+// Ordenar las categorías alfabéticamente
+usort($data, function ($a, $b) {
+    return strcmp($a['name'], $b['name']);
+});
+
 // Convertir datos a JSON
 $jsonData = json_encode($data);
 ?>
